@@ -1,0 +1,143 @@
+.env.example : Plantilla de variables de entorno (URLs, claves, límites, rutas de data).
+
+README.md : Guía general del proyecto y cómo empezar.
+
+Caddyfile : Config del reverse proxy Caddy (dominio, TLS, proxy a la API).
+
+docker-compose.yml : Orquestación de contenedores (API + Caddy + volúmenes/red).
+
+.gitignore : Archivos/carpetas que Git no debe versionar (data, .env, etc.).
+
+package.json : Metadatos del proyecto Node (scripts y dependencias).
+
+tsconfig.json : Configuración de TypeScript.
+
+docker/Dockerfile : Receta para construir la imagen de la API.
+
+docker/entrypoint.sh : Script de arranque (p. ej., migraciones + iniciar servidor).
+
+public/robots.txt : Instrucciones para bots/robots (por defecto, no indexar).
+
+scripts/README.md : Descripción de scripts utilitarios (migrar, seed, bootstrap).
+
+docs/ARCHITECTURE.md : Resumen de arquitectura y decisiones de diseño.
+
+docs/API_SPEC.md : Borrador del contrato de endpoints (rutas/param/resp).
+
+docs/THREAT_MODEL.md : Riesgos comunes y medidas (validaciones, límites, etc.).
+
+docs/DEPLOYMENT.md : Guía de despliegue/entornos y buenas prácticas.
+
+src/app/server.ts : Punto de entrada del servidor HTTP (crea app, arranca).
+
+src/config/index.ts : Ensambla y exporta la configuración central de la app.
+
+src/config/env.ts : Lee/valida variables de entorno.
+
+src/config/limits.ts : Límites globales (tamaño por archivo, cuota, ventanas).
+
+src/config/routes.ts : Registro/enrutado de módulos (monta las rutas en la app).
+
+src/core/jwt.ts : Utilidades para firmar/verificar JWT.
+
+src/core/hashing.ts : Hash/verificación de contraseñas (Argon2/bcrypt).
+
+src/core/validation.ts : Esquemas/DTOs reutilizables para validar inputs/outputs.
+
+src/core/errors.ts : Tipos y helpers de errores (HTTP, dominio).
+
+src/core/logger.ts : Logger estructurado para logs.
+
+src/core/types.d.ts : Tipos/Interfaces compartidas.
+
+src/middleware/auth.ts : Middleware que valida JWT y adjunta el usuario al request.
+
+src/middleware/rateLimit.ts : Limitador de peticiones (anti-abuso).
+
+src/middleware/errorHandler.ts : Captura errores y responde de forma uniforme.
+
+src/mmiddleware/cors.ts : Configuración de CORS (qué orígenes pueden llamar).
+
+src/modules/auth/routes.ts : Rutas de registro/login/refresh.
+
+src/modules/auth/controller.ts : Orquesta requests/responses de auth.
+
+src/modules/auth/service.ts : Reglas de negocio de autenticación.
+
+src/modules/auth/dto.ts : Esquemas/DTOs para inputs de auth.
+
+src/modules/users/routes.ts : Rutas de usuario (perfil, etc.).
+
+src/modules/users/controller.ts : Controlador de usuario.
+
+src/modules/users/service.ts : Lógica de negocio de usuario.
+
+src/modules/users/repo.ts : Acceso a datos de usuario en SQLite.
+
+src/modules/users/dto.ts : DTOs/esquemas de usuario.
+
+src/modules/channels/routes.ts : Rutas de canales (crear/listar/invitar/unirse).
+
+src/modules/channels/controller.ts : Controlador de canales.
+
+src/modules/channels/service.ts : Lógica de negocio (membresías, permisos).
+
+src/modules/channels/repo.ts : Acceso a datos de canales/members en SQLite.
+
+src/modules/channels/dto.ts : DTOs/esquemas de canales (crear, invitar, etc.).
+
+src/modules/clips/routes.ts : Rutas de clips (crear, latest, historial, borrar).
+
+src/modules/clips/controller.ts : Controlador de clips.
+
+src/modules/clips/service.ts : Reglas de negocio (TTL 7 días, filtros).
+
+src/modules/clips/repo.ts : Acceso a datos de clips en SQLite (rango por fecha).
+
+src/modules/clips/dto.ts : DTOs/esquemas de clips.
+
+src/modules/files/routes.ts : Rutas de archivos (upload multipart/descarga).
+
+src/modules/files/controller.ts : Controlador de subidas/descargas.
+
+src/modules/files/service.ts : Lógica (validar MIME, límites, rutas seguras).
+
+src/modules/files/storage.ts : Abstracción de almacenamiento en disco (FILES_DIR).
+
+src/modules/files/dto.ts : DTOs/esquemas de metadatos de archivos.
+
+src/modules/health/routes.ts : Rutas de salud (/healthz, /readyz).
+
+src/modules/health/controller.ts : Checks de estado (DB/FS/listeners).
+
+src/modules/usage/routes.ts : Endpoint de uso/cuotas (bytes por user/canal).
+
+src/modules/usage/controller.ts : Controlador de métricas de uso.
+
+src/modules/usage/service.ts : Cálculo de consumo en ventana de 7 días.
+
+src/db/sqlite.ts : Inicialización cliente SQLite (modo WAL) y helpers de DB.
+
+src/db/migrations/* : Carpeta para scripts SQL versionados (estructura de tablas).
+
+src/db/seeds/* : Seeds opcionales para desarrollo/pruebas.
+
+src/worker/scheduler.ts : Planificador (cron interno) de tareas periódicas.
+
+src/worker/purgeExpired.ts : Purga de clips/archivos con expires_at < now().
+
+src/worker/quotas.ts : Recuento/aplicación de cuotas por usuario/canal.
+
+src/tests/README.md : Guía para pruebas (unitarias/E2E).
+
+src/tests/e2e/* : Carpeta para tests “end-to-end”.
+
+src/tests/unit/* : Carpeta para tests unitarios.
+
+src/tests/fixtures/* : Datos/archivos de prueba.
+
+data/sqlite.db (se crea en runtime) : Archivo real de base de datos.
+
+data/files/* : Árbol de archivos subidos (user/<u>/channel/<c>/clip/<id>/…).
+
+caddy_data/* y caddy_config/* : Persistencia interna de Caddy (certs/config).

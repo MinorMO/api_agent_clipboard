@@ -1,0 +1,9 @@
+clipboard.minormarin.me{
+	encode zstd gzip
+	reverse_proxy api:3000 {
+		transport http {
+			read_timeout  5m
+			write_timeout 5m
+		}
+	}
+}
