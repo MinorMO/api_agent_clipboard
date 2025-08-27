@@ -1,3 +1,8 @@
+// Permite actualizar el campo text_content de un clip
+export function updateClipTextContent(clipId: string, newText: string) {
+  const db = getDb();
+  db.prepare(`UPDATE clips SET text_content = ? WHERE id = ?`).run(newText, clipId);
+}
 import { getDb } from '../../db/sqlite';
 
 export type ClipRow = {

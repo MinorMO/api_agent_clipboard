@@ -2,7 +2,8 @@ import { z } from 'zod';
 
 export const CreateTextClipDTO = z.object({
   channelId: z.string().min(1),
-  text: z.string().min(1).max(100_000), // 100k chars como límite razonable
+  // antes: text: z.string().min(1).max(100_000)
+  text: z.string().max(100_000).optional().default(''),  // ✅ acepta vacío
 });
 
 export const LatestQueryDTO = z.object({
@@ -11,8 +12,8 @@ export const LatestQueryDTO = z.object({
 
 export const RangeQueryDTO = z.object({
   channelId: z.string().min(1),
-  from: z.string().datetime().optional(), // ISO
-  to: z.string().datetime().optional(),   // ISO
+  from: z.string().datetime().optional(),
+  to: z.string().datetime().optional(),
   limit: z.coerce.number().int().min(1).max(200).default(50),
 });
 

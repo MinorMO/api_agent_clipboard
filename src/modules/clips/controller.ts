@@ -4,6 +4,7 @@ import { clipsService } from './service';
 import type { Env } from '../../config/env';
 
 export function clipsController(env: Env) {
+  debugger;
   return {
     createText(req: Request, res: Response, next: NextFunction) {
       try {
